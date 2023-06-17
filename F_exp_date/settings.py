@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # add apps
     'users',
-    'product_record',
+    'product',
     
 ]
 
