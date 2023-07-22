@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1 align="center">Продукты с подходящим сроком годности</h1>
+    <h2 align="center">Number of market {{ number_market }}</h2>
+    <div align="center">
+        <h4> Сегодня: {{ date|date:"l d M Y" }}</h4>
+        <br><HR>
+    
+    {% for product in  show_all_products%}
+    <li>{{ product.product_name }}</li>
+    <li><img src="media/{{ product.img.url }}" width="200", height="200"/></li>
+
+    <li>{{ product.barcode }}</li>
+    <li>{{ product.write_off }}</li>
+    <li>{{ product.number_of_market }}</li>
+    <br>
+    <HR>
+    {% endfor %}
+    </div>
+
+</body>
+</html>

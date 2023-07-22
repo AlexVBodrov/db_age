@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    {{ title|title }}
+    {% endblock %}
+
+    {% block css %}
+    {% endblock %}
+
+    {% block js %}
+    {% endblock %}
+</head>
+<body>
+    <h1 align="center">Продукты с подходящим сроком годности</h1>
+    <div align="center">
+        <br><HR>
+            {% include 'base/main-menu.html' %}
+            {% block header %}
+                {% include 'base/header.html' %}
+            {% endblock header %}
+            {% block content %}
+                Lorem ipsum dolor
+            {% endblock content %}
+            {% include 'base/footer.html' %}
+            {% include 'base/scripts.html' %}
+</body>
+</html>

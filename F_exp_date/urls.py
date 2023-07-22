@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from product.views import show_main_page
+from market_dashbord.views import create_new_market, show_market
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', show_main_page),
+    path('new-market', create_new_market),
+    path('market_detail/<int:pk>/', show_market, name='market_detail')
 ]
+# включаем возможность обработки картинок
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
