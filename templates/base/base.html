@@ -16,16 +16,22 @@
 </head>
 <body>
     {% block body %}
-    <h1 align="center">Продукты с подходящим сроком годности</h1>
-    <div align="center">
+
+    {% block header %}
+    {% include 'base/header.html' %}
+    {% endblock %}
+
+    {% block menu %}
+    {% include 'base/main-menu.html' %}
+    {% endblock %}
+
+
         <br><HR>
-            {% include 'base/main-menu.html' %}
-            {% block header %}
-                {% include 'base/header.html' %}
-            {% endblock header %}
+
             {% block content %}
                 Lorem ipsum dolor
             {% endblock content %}
+
             {% include 'base/footer.html' %}
             {% include 'base/scripts.html' %}
     {% endblock %}
