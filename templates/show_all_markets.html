@@ -6,17 +6,13 @@
     <div align="center">
         <h4> Сегодня: {{ date|date:"l d M Y" }}</h4>
         <br><HR>
-    
-    {% for product in  show_all_products%}
-    <li>{{ product.number_market }}</li>
-    <li>{{ product.product_name }}</li>
-    <!-- <li><img src="{{ product.img.url }}" width="200", height="200"></li> -->
 
-    <li>{{ product.barcode }}</li>
-    <li>{{ product.write_off }}</li>
-    <li>{{ product.number_of_market }}</li>
-    <br>
-    <HR>
-    {% endfor %}
+        <form method="POST">
+            <select name="item_id">
+            {% for entry in items %}
+                <option value="{{ entry.id }}">{{ entry.name }}</option>
+            {% endfor %}
+            </select>
+        </form>
     </div>
 {% endblock %}
