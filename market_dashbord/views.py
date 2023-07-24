@@ -1,6 +1,6 @@
 import datetime
 from django.shortcuts import get_object_or_404, redirect, render
-from market_dashbord.forms import MarketForm
+from market_dashbord.forms import MarketForm, ChooseMarketForm
 from market_dashbord.models import Market
 from product.models import Product
 # Create your views here.
@@ -24,8 +24,7 @@ def create_new_market(request):
         if form.is_valid():
             instanse = form.save(commit=False)
             instanse.save()
-        return redirect('market_dashbord:market_detail', pk=instanse.pk)
-        # return render(request, 'new-market.html', {'form': form, 'title':'Create new market'})
+        return redirect('market_dashbord:market_detail', pk=instanse.number_market)
     else:
         form = MarketForm()
         
@@ -43,9 +42,9 @@ def show_market(request, pk):
     return render(request, 'market_detail.html', context)
 
 def show_all_markets(request):
-    show_all_products = Market.objects.all()
+    all_markets = Market.objects.all()
     
-    context= {'show_all_products': show_all_products,
+    context= {'all_markets': all_markets,
               'date': datetime.datetime.now(),
               'title': 'show_market',}
     
@@ -53,17 +52,13 @@ def show_all_markets(request):
 
 def show_my_market(request):
     """ выбрать магазин"""
-    if request.method == "POST":
-        form = MarketForm(request.POST)
-
-        if form.is_valid():
-            instanse = form.save(commit=False)
-            return redirect('market_dashbord:market_detail', pk=instanse.pk)
-
+    
+    if request.method == 'POST':
+        number_market = request.POST.get('number_market')
+        return redirect('market_dashbord:market_detail', pk=number_market)
     else:
-        form = MarketForm()
-        
-    return render(request, 'new-market.html', {'form': form, 'title':'Create new market'})
+        form = ChooseMarketForm(request.POST)
+    return render(request, 'show_my_market.html', {'form': form, 'title':'show_my_market'})
     
 
 def create_food_record(request, record):

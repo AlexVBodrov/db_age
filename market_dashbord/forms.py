@@ -5,4 +5,9 @@ class MarketForm(ModelForm):
     class Meta:
         model = Market
 
+        fields = '__all__'
+
+class ChooseMarketForm(ModelForm):
+    class Meta:
+        model = Market
         fields = ['number_market']
