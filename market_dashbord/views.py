@@ -46,7 +46,7 @@ def show_all_markets(request):
     
     context= {'all_markets': all_markets,
               'date': datetime.datetime.now(),
-              'title': 'show_market',}
+              'title': 'show_market'}
     
     return render(request, 'show_all_markets.html', context)
 

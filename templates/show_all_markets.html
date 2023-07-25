@@ -8,7 +8,7 @@
         <br><HR>
     
     {% for market in all_markets %}
-    <a href="{% url 'market_dashbord:market_detail' market.id %}">
+    <a href="{% url 'market_dashbord:market_detail' market.number_market %}">
         <li>{{ market.number_market }}</li>
     </a>
     <li>{{ market.adress_market }}</li>

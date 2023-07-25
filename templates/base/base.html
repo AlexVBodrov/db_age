@@ -18,22 +18,19 @@
     {% block body %}
 
     {% block header %}
-    {% include 'base/header.html' %}
-    {% endblock %}
+        {% include 'base/header.html' %}
+    {% endblock header %}
 
     {% block menu %}
-    {% include 'base/main-menu.html' %}
-    {% endblock %}
-
-
+        {% include 'base/main-menu.html' %}
+    {% endblock menu %}
         <br><HR>
-
             {% block content %}
                 Lorem ipsum dolor
             {% endblock content %}
 
             {% include 'base/footer.html' %}
             {% include 'base/scripts.html' %}
-    {% endblock %}
+    {% endblock body %}
 </body>
 </html>
