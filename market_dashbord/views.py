@@ -32,7 +32,7 @@ def create_new_market(request):
 
 def show_market(request, pk):
     number_market = get_object_or_404(Market, pk=pk)
-    show_all_products = Product.objects.all()
+    show_all_products = Product.objects.filter(number_of_market=number_market)
     
     context= {'show_all_products': show_all_products,
               'date': datetime.datetime.now(),
@@ -81,3 +81,6 @@ def show_30_day_food():
         Просмотр товара с подходящими сроками годности(30 дней)
     '''
     pass
+
+def show_contacts(request):
+    return render(request, 'contact.html')

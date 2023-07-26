@@ -4,7 +4,7 @@ from market_dashbord.models import Market
 # Create your models here.
 class Product(models.Model):
     img = models.ImageField(upload_to='products/%Y-%m-%d/', verbose_name='Product')
-    date_best_before = models.DateTimeField()
+    date_best_before = models.DateField()
     barcode = models.CharField(max_length=15, blank=True)
     product_name = models.CharField(max_length=100, blank=True)
     write_off = models.BooleanField(default=False)
