@@ -11,3 +11,5 @@ def show_main_page(request):
               'title': 'Главная страница'}
     
     return render(request, 'index.html', context=context)
+
+

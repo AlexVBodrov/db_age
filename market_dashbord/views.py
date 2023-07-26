@@ -2,6 +2,7 @@ import datetime
 from django.shortcuts import get_object_or_404, redirect, render
 from market_dashbord.forms import MarketForm, ChooseMarketForm
 from market_dashbord.models import Market
+from product.forms import AddProductForm
 from product.models import Product
 # Create your views here.
 """
@@ -61,12 +62,23 @@ def show_my_market(request):
     return render(request, 'show_my_market.html', {'form': form, 'title':'show_my_market'})
     
 
-def create_food_record(request, record):
+def create_food_record(request):
     '''
         Create a food record
         Добавить товар в базу данных
     '''
-    pass
+    
+    if request.method == "POST":
+        form = AddProductForm(request.POST)
+        if form.is_valid():
+            instanse = form.save(commit=False)
+            instanse.save()
+        number_market = request.POST.get('number_of_market')
+        return redirect('market_dashbord:market_detail', pk=number_market)
+    else:
+        form = AddProductForm()
+        
+    return render(request, 'create_food_record.html', {'form': form, 'title':'Create new product'})
 
 
 def show_6_day_food():
