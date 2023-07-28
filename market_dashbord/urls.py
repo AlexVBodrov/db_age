@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
-from market_dashbord.views import create_new_market, show_market, show_my_market, show_all_markets, show_contacts, create_food_record
+from market_dashbord.views import create_new_market, show_market, show_my_market, show_all_markets, show_contacts, create_food_record, show_6_day_food, show_30_day_food
 
 app_name = 'market_dashbord'
 

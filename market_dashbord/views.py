@@ -67,9 +67,8 @@ def create_food_record(request):
         Create a food record
         Добавить товар в базу данных
     '''
-    
     if request.method == "POST":
-        form = AddProductForm(request.POST)
+        form = AddProductForm(request.POST, request.FILES)
         if form.is_valid():
             instanse = form.save(commit=False)
             instanse.save()
@@ -81,18 +80,36 @@ def create_food_record(request):
     return render(request, 'create_food_record.html', {'form': form, 'title':'Create new product'})
 
 
-def show_6_day_food():
+def show_6_day_food(request):
     '''
         Просмотр товара с подходящими сроками годности(6 дней)
     '''
-    pass
+    # number_market = get_object_or_404(Market, pk=pk)
+    
+    startdate = datetime.date.today()
+    enddate = startdate + datetime.timedelta(days=6)
+    show_6_day_best_before = Product.objects.filter(date_best_before__range=[startdate, enddate])
+    context= {'all_items': show_6_day_best_before,
+              'date': datetime.datetime.now(),
+              'title': 'show_6_day_best_before'}
+            #   'number_market': number_market}
+    
+    return render(request, 'show_6_day_best_before.html', context)
 
 
-def show_30_day_food():
+def show_30_day_food(request):
     '''
         Просмотр товара с подходящими сроками годности(30 дней)
     '''
-    pass
+    # number_market = get_object_or_404(Market, pk=pk)
+    startdate = datetime.date.today()
+    enddate = startdate + datetime.timedelta(days=30)
+    show_30_day_best_before = Product.objects.filter(date_best_before__range=[startdate, enddate])
+    context= {'all_items': show_30_day_best_before,
+              'date': datetime.datetime.now(),
+              'title': 'show_6_day_best_before'}
+    return render(request, 'show_6_day_best_before.html', context)
+
 
 def show_contacts(request):
     return render(request, 'contact.html')

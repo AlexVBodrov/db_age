@@ -7,5 +7,5 @@ class Market(models.Model):
     adress_market = models.CharField(max_length=65,unique=True)
 
     def __str__(self):
-        out = f'Магазин N{self.number_market}: {self.adress_market}'
+        out = f'Магазин N: {self.number_market} : по адресу {self.adress_market}'
         return out
