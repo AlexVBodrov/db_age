@@ -8,10 +8,23 @@
         <title>{{ title }}</title>
     {% endblock %}
 
-    {% block css %}
-    {% endblock %}
+    {# Load the tag library #}
+    {% load bootstrap5 %}
+    
+    {# Load CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
 
+
+    {% block css %}
+    
+    {% endblock %}
+    
     {% block js %}
+    
     {% endblock %}
 </head>
 <body>

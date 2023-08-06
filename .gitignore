@@ -5,6 +5,14 @@ __pycache__/
 
 # C extensions
 *.so
+Thumbs.db
+.DS_Store
+.dist
+.tmp
+.sass-cache
+npm-debug.log
+node_modules
+package-lock.json
 
 # Distribution / packaging
 .Python
