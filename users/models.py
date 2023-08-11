@@ -16,7 +16,6 @@ class User(models.Model):
     e_mail = models.CharField(max_length=50, blank=True)
     password = models.CharField(max_length=20)
     number_market = models.ForeignKey(Market, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return self.name
-    

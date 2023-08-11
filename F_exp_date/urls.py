@@ -23,7 +23,7 @@ from product.views import show_main_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', show_main_page),
+    path('', show_main_page, name='main_page'),
     path('', include('product.urls', namespace='product')),
     path('', include('market_dashbord.urls', namespace='market_dashbord')),
 

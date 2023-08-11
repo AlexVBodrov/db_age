@@ -1,22 +1,28 @@
-{% extends "base\base.html" %}
-{% load static %}
+{% extends "base\base.html" %} {% load static %} {% block content %}
+<h1 align="center">Продукты с подходящим сроком годности</h1>
+<div align="center">
+  <h4>Сегодня: {{ date|date:"l d M Y" }}</h4>
+  <br />
+  <hr />
+  <div class="container">
+    <form class="d-flex">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Поиск"
+        aria-label="Поиск"
+      />
+      <button class="btn btn-outline-success" type="submit">Поиск</button>
+    </form>
+  </div>
 
-{% block content %}
-    <h1 align="center">Продукты с подходящим сроком годности</h1>
-    <div align="center">
-        <h4> Сегодня: {{ date|date:"l d M Y" }}</h4>
-        <br><HR>
-    
-    {% for market in all_markets %}
-    <a href="{% url 'market_dashbord:market_detail' market.number_market %}">
-        <li>{{ market.number_market }}</li>
-    </a>
-    <li>{{ market.adress_market }}</li>
-    <br>
-    <HR>
-    {% endfor %}
-
-    
-
-    </div>
+  {% for market in all_markets %}
+  <a href="{% url 'market_dashbord:market_detail' market.number_market %}">
+    <li>{{ market.number_market }}</li>
+  </a>
+  <li>{{ market.adress_market }}</li>
+  <br />
+  <hr />
+  {% endfor %}
+</div>
 {% endblock %}

@@ -11,7 +11,11 @@
             {{ form }}
             <input type="submit" value="Выбрать магазин">
         </form>
-    
+        <br><HR>
+        <ul>
+            <li><a class="" href="{% url 'market_dashbord:show_all_markets' %}">Список Магазинов</a></li>
+        </ul>
+            
 
     </div>
 {% endblock content %}
