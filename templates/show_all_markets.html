@@ -4,7 +4,8 @@
   <h4>Сегодня: {{ date|date:"l d M Y" }}</h4>
   <br />
   <hr />
-  <div class="container">
+  <br />
+  <div class="container col-4">
     <form class="d-flex">
       <input
         class="form-control me-2"
@@ -15,7 +16,8 @@
       <button class="btn btn-outline-success" type="submit">Поиск</button>
     </form>
   </div>
-
+  <br />
+  <hr />
   {% for market in all_markets %}
   <a href="{% url 'market_dashbord:market_detail' market.number_market %}">
     <li>{{ market.number_market }}</li>
