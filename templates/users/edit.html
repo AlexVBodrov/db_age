@@ -1,0 +1,17 @@
+{% extends "base\base.html" %} {% load static %} {% block content %}
+<div class="container col-4">
+<form
+  class="form-horizontal"
+  action="{% url 'users:edit' %}"
+  method="post"
+  enctype="multipart/form-data"
+>
+  {% csrf_token %} {{ edit_form.as_p }}
+  <input class="form-control" type="submit" value="сохранить" />
+</form>
+<button class="btn btn-round form-control last">
+  <a href="{% url 'main_page' %}" class=""> на главную </a>
+</button>
+
+</div>
+{% endblock %}

@@ -60,7 +60,7 @@
 
         {% if user.is_authenticated %}
         <li>
-          <a class="nav-link mx-2" href="#">
+          <a class="nav-link mx-2" href="{% url 'users:edit' %}">
             Профиль: {{ user.username|default:'Гость' }}
           </a>
         </li>
@@ -90,6 +90,13 @@
                 class="dropdown-item"
                 href="{% url 'market_dashbord:show_contacts' %}"
                 >Контакты</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="{% url 'users:register' %}"
+                >Зарегистрироваться</a
               >
             </li>
             <li>
