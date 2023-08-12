@@ -18,15 +18,18 @@ from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
 from product.views import show_main_page
+from F_exp_date.settings import DEBUG
 
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('', show_main_page, name='main_page'),
     path('', include('product.urls', namespace='product')),
     path('', include('market_dashbord.urls', namespace='market_dashbord')),
+    path('', include('users.urls', namespace='users'))
 
 ]
-# включаем возможность обработки картинок
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if DEBUG==True:
+    # включаем возможность обработки картинок
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
