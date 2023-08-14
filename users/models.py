@@ -24,23 +24,13 @@ class User(AbstractUser):
                                   'unique': 'Пользователь с таким email уже есть'}
                               )
 
+    market_number = models.ForeignKey(Market, on_delete=models.SET_NULL, verbose_name='market_number', blank=True,
+                                      null=True)
+    avatar = models.ImageField(
+        upload_to='users_avatars/%Y-%m-%d/', blank=True, verbose_name='avatar')
+
     def __str__(self):
         if self.first_name and self.last_name:
             return self.get_full_name()
         else:
             return self.username
-
-
-# class UserProfile(models.Model):
-#     username = models.OneToOneField(User, on_delete=models.CASCADE)
-#     avatar = models.ImageField(
-#         upload_to='users_avatars/%Y-%m-%d/', blank=True, verbose_name='avatar')
-#     age = models.PositiveIntegerField(
-#         verbose_name='возраст', blank=False, default=18)
-
-#     number_market = models.ForeignKey(
-#         Market, on_delete=models.CASCADE)
-#     # custom
-
-#     def __str__(self):
-#         return self.username

@@ -12,6 +12,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user and user.is_active:
             auth.login(request, user)
+            # добавить функцию чтобы переходил на свой магазин по ID 
             return HttpResponseRedirect(reverse('main_page'))
     content = {'title': title, 'login_form': login_form}
     return render(request, 'users/login.html', content)
