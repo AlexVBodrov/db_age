@@ -30,6 +30,7 @@ class User(AbstractUser):
         upload_to='users_avatars/%Y-%m-%d/', blank=True, verbose_name='avatar')
 
     def __str__(self):
+        # если поля заполнены
         if self.first_name and self.last_name:
             return self.get_full_name()
         else:
