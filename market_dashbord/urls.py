@@ -11,7 +11,9 @@ urlpatterns = [
     path('market_detail/<int:pk>/', show_market, name='market_detail'),
     path('new-market', create_new_market, name='create_new_market'),
     path('show_contacts', show_contacts, name='show_contacts'),
+    path('show_6_day_food', show_6_day_food, name='show_6_day_food'),
+    path('show_30_day_food', show_30_day_food, name='show_30_day_food'),
     path('create_food_record', create_food_record, name='create_food_record'),
-    # path('employee/register/', views.employee_registration, name='employee-registration'),
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

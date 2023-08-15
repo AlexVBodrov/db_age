@@ -6,4 +6,5 @@ class AddProductForm(ModelForm):
     class Meta:
         model = Product
 
-        fields = '__all__'
+        fields = ('img', 'barcode', 'date_best_before', 'product_name',
+                  'barcode', 'number_of_market')
