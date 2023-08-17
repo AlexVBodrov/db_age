@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 from market_dashbord.models import Market
 
 # Create your models here.
@@ -15,6 +16,14 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+    @staticmethod
+    def show_date_best_before(num_market, days):
+        startdate = datetime.date.today()
+        enddate = startdate + datetime.timedelta(days=days)
+        show_products_best_before = Product.objects.filter(number_of_market=num_market).filter(
+            date_best_before__range=[startdate, enddate])
+        return show_products_best_before
 
     class Meta:
         ordering = ['date_best_before']

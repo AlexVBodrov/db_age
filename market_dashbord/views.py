@@ -6,7 +6,7 @@ from market_dashbord.models import Market
 from product.forms import AddProductForm
 from market_dashbord.models import Market
 from product.models import Product
-
+from users.models import User
 # Create your views here.
 """
 Главная-> Инструкция к приложению
@@ -98,10 +98,7 @@ def show_6_day_food(request):
     if request.user.is_authenticated:
         num_market = request.user.market_number
 
-        startdate = datetime.date.today()
-        enddate = startdate + datetime.timedelta(days=6)
-        show_6_day_best_before = Product.objects.filter(number_of_market=num_market).filter(
-            date_best_before__range=[startdate, enddate])
+        show_6_day_best_before = Product.show_date_best_before(num_market, 6)
 
         context = {'all_items': show_6_day_best_before,
                    'date': datetime.datetime.now(),
@@ -118,10 +115,8 @@ def show_30_day_food(request):
     '''
     num_market = request.user.market_number
 
-    startdate = datetime.date.today()
-    enddate = startdate + datetime.timedelta(days=30)
-    show_30_day_best_before = Product.objects.filter(number_of_market=num_market).filter(
-        date_best_before__range=[startdate, enddate])
+    show_30_day_best_before = Product.show_date_best_before(num_market, 30)
+
     context = {'all_items': show_30_day_best_before,
                'date': datetime.datetime.now(),
                'title': 'show_6_day_best_before'}
