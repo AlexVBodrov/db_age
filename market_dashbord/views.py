@@ -6,7 +6,7 @@ from market_dashbord.models import Market
 from product.forms import AddProductForm
 from market_dashbord.models import Market
 from product.models import Product
-from users.models import User
+
 # Create your views here.
 """
 Главная-> Инструкция к приложению
@@ -96,29 +96,31 @@ def show_6_day_food(request):
     '''
 
     if request.user.is_authenticated:
-        number_market = request.user.market_number
+        num_market = request.user.market_number
+
         startdate = datetime.date.today()
         enddate = startdate + datetime.timedelta(days=6)
-        show_6_day_best_before = Product.objects.filter(
+        show_6_day_best_before = Product.objects.filter(number_of_market=num_market).filter(
             date_best_before__range=[startdate, enddate])
+
         context = {'all_items': show_6_day_best_before,
-                'date': datetime.datetime.now(),
-                'title': 'show_6_day_best_before',
-        'number_market': number_market}
+                   'date': datetime.datetime.now(),
+                   'title': 'show_6_day_best_before',
+                   'number_market': num_market}
         return render(request, 'show_6_day_best_before.html', context)
     else:
         return HttpResponseRedirect(reverse('main_page'))
-    
 
 
 def show_30_day_food(request):
     '''
         Просмотр товара с подходящими сроками годности(30 дней)
     '''
-    # number_market = get_object_or_404(Market, pk=pk)
+    num_market = request.user.market_number
+
     startdate = datetime.date.today()
     enddate = startdate + datetime.timedelta(days=30)
-    show_30_day_best_before = Product.objects.filter(
+    show_30_day_best_before = Product.objects.filter(number_of_market=num_market).filter(
         date_best_before__range=[startdate, enddate])
     context = {'all_items': show_30_day_best_before,
                'date': datetime.datetime.now(),
