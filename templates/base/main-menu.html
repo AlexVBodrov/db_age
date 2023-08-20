@@ -15,7 +15,7 @@
 
 Войти -->
 {% load static %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-3 sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'main_page' %}">Анти-Просрок</a>
     <button
@@ -125,6 +125,13 @@
                 class="dropdown-item"
                 href="{% url 'market_dashbord:create_new_market' %}"
                 >Добавить свой магазин</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="{% url 'market_dashbord:show_write_off' %}"
+                >Списанные продукты</a
               >
             </li>
             <li>

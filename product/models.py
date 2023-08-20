@@ -20,6 +20,8 @@ class Product(models.Model):
 
     @staticmethod
     def show_date_best_before(num_market, days):
+        if days > 31:
+            days = 31
         startdate = datetime.date.today()
         enddate = startdate + datetime.timedelta(days=days)
         show_products_best_before = Product.objects.filter(number_of_market=num_market).filter(
@@ -27,6 +29,7 @@ class Product(models.Model):
         return show_products_best_before
 
     def expired(self):
+        # Меняет статус на просроченный
         today_date = datetime.date.today()
         if self.date_best_before <= today_date:
             self.is_expired = True

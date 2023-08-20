@@ -1,21 +1,41 @@
-{% extends "base\base.html" %}
-{% load static %}
+{% extends "base\base.html" %} {% load static %} {% block content %}
+<h1 align="center">Продукты с подходящим сроком годности</h1>
+<div align="center">
+  <h4>Сегодня: {{ date|date:"l d M Y" }}</h4>
+  <br />
+  <hr />
+  <br />
+  {% for product in all_items %}
 
-{% block content %}
-    <h1 align="center">Продукты с подходящим сроком годности</h1>
-    <div align="center">
-        <h4> Сегодня: {{ date|date:"l d M Y" }}</h4>
-        <br><HR>
-    
-    {% for product in  all_items %}
-    <li>{{ product.product_name }}</li>
-    <li><img src="{{ product.img.url }}" width="200", height="200"></li>
-    <li>{{ product.date_best_before }}</li>
-    <li>{{ product.barcode }}</li>
-    <li>{{ product.write_off }}</li>
-    <li>{{ product.number_of_market }}</li>
-    <br>
-    <HR>
-    {% endfor %}
+  <div
+    class="card rounded border border-5 {% if product.is_expired %}border-danger {% else %} border-success {% endif %}"
+    style="max-width: 35rem"
+  >
+    <img src="{{ product.img.url }}" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">Название: {{ product.product_name }}</h5>
+      <!-- <p class="card-text">Небольшой пример текста, который должен основываться на названии карты и составлять основную часть содержимого карты.</p> -->
     </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Годен до: {{ product.date_best_before }}</li>
+      <li class="list-group-item">ШК: {{ product.barcode }}</li>
+    </ul>
+    {% if product.is_expired %}
+    <div class="card-body">
+      <p class="list-group-item border-danger" style="max-width: 50%">Просроченый</p><br>
+      <a
+        href="{% url 'market_dashbord:write_off_product' product.pk %}"
+        class="btn btn-success"
+        >Списать</a
+      >
+    </div>
+    {% endif %}
+  </div>
+
+  <br />
+  <hr />
+  <br />
+
+  {% endfor %}
+</div>
 {% endblock content %}

@@ -98,9 +98,11 @@ def show_6_day_food(request):
     if request.user.is_authenticated:
         num_market = request.user.market_number
 
-        show_6_day_best_before = Product.show_date_best_before(num_market, 6)
+        products = Product.show_date_best_before(num_market, 6).filter(write_off=False)
+        for product in products:
+            product.expired()
 
-        context = {'all_items': show_6_day_best_before,
+        context = {'all_items': products,
                    'date': datetime.datetime.now(),
                    'title': 'show_6_day_best_before',
                    'number_market': num_market}
@@ -115,13 +117,35 @@ def show_30_day_food(request):
     '''
     num_market = request.user.market_number
 
-    show_30_day_best_before = Product.show_date_best_before(num_market, 30)
+    products = Product.show_date_best_before(num_market, 30).filter(write_off=False)
+    for product in products:
+        product.expired()
 
-    context = {'all_items': show_30_day_best_before,
+    context = {'all_items': products,
                'date': datetime.datetime.now(),
                'title': 'show_6_day_best_before'}
     return render(request, 'show_30_day_best_before.html', context)
 
 
+def show_write_off(request):
+    '''
+        Просмотр списсанного товара(30 дней)
+    '''
+    num_market = request.user.market_number
+
+    products = Product.show_date_best_before(num_market, 30).filter(write_off=True)
+
+    context = {'all_items': products,
+               'date': datetime.datetime.now(),
+               'title': 'show_6_day_best_before'}
+    return render(request, 'show_write_off.html', context)
+
 def show_contacts(request):
     return render(request, 'contact.html')
+
+
+def write_off_product(request, pk):
+    product =  get_object_or_404(Product, pk=pk)
+    product.write_off = True
+    product.save()
+    return redirect('market_dashbord:show_6_day_food')

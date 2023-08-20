@@ -6,9 +6,8 @@
   <hr />
   <br />
   {% for product in all_items %}
-
   <div
-    class="card rounded border border-3 {% if product.is_expired %}border-danger {% else %} border-success {% endif %}"
+    class="card rounded border border-1 border-primary"
     style="max-width: 35rem"
   >
     <img src="{{ product.img.url }}" class="card-img-top" alt="..." />
@@ -18,18 +17,17 @@
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Годен до: {{ product.date_best_before }}</li>
+      {% if product.is_expired %}
+      <li class="list-group-item">Просрочен</li>
+      {% endif %}
+      {% if product.write_off %}
+      <li class="list-group-item">Списан</li>
+      {% endif %}
+
       <li class="list-group-item">ШК: {{ product.barcode }}</li>
+      <li class="list-group-item">{{ product.number_of_market }}</li>
     </ul>
-    {% if product.is_expired %}
-    <div class="card-body">
-      <p class="list-group-item border-danger" style="max-width: 50%">Просроченый</p><br>
-      <a
-        href="{% url 'market_dashbord:write_off_product' product.pk %}"
-        class="btn btn-success"
-        >Списать</a
-      >
-    </div>
-    {% endif %}
+
   </div>
 
   <br />
