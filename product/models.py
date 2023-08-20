@@ -12,6 +12,7 @@ class Product(models.Model):
     barcode = models.CharField(max_length=15, blank=True)
     product_name = models.CharField(max_length=100, blank=True)
     write_off = models.BooleanField(default=False)
+    is_expired = models.BooleanField(default=False)
     number_of_market = models.ForeignKey(Market, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -24,6 +25,12 @@ class Product(models.Model):
         show_products_best_before = Product.objects.filter(number_of_market=num_market).filter(
             date_best_before__range=[startdate, enddate])
         return show_products_best_before
+
+    def expired(self):
+        today_date = datetime.date.today()
+        if self.date_best_before <= today_date:
+            self.is_expired = True
+        # return self.date_best_before <= today_date
 
     class Meta:
         ordering = ['date_best_before']
