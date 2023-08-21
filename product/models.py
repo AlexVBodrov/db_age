@@ -33,7 +33,7 @@ class Product(models.Model):
         today_date = datetime.date.today()
         if self.date_best_before <= today_date:
             self.is_expired = True
-        # return self.date_best_before <= today_date
+
 
     class Meta:
         ordering = ['date_best_before']

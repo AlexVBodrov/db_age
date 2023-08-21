@@ -3,11 +3,14 @@ from users.forms import UserLoginForm, UserRegisterForm, UserEditForm
 from market_dashbord.models import Market
 from product.models import Product
 from users.models import User
-
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import auth
 from django.urls import reverse
 
-
+@user_passes_test(
+       lambda user: user.is_anonymous,
+       login_url='main_page'
+   )
 def login(request):
     title = 'вход'
     login_form = UserLoginForm(data=request.POST)
@@ -33,6 +36,7 @@ def logout(request):
     return HttpResponseRedirect(reverse('main_page'))
 
 
+@login_required(redirect_field_name='main_page')
 def edit(request):
     title = 'редактирование'
     if request.method == 'POST':

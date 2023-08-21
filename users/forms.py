@@ -13,26 +13,26 @@ class UserLoginForm(AuthenticationForm):
 
 
 class UserRegisterForm(UserCreationForm):
-    class Meta:
-        model = User
-        fields = ('username', 'password1', 'password2',
-                  'email', 'position', 'telephone', 'avatar',)
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             # field.help_text = ''
 
-
-class UserEditForm(UserChangeForm):
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email',
-                  'avatar', 'telephone', 'market_number')
+        fields = ('username', 'password1', 'password2',
+                  'email', 'position', 'telephone', 'avatar',)
 
+
+class UserEditForm(UserChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
+
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email',
+                  'avatar', 'telephone', 'market_number')
