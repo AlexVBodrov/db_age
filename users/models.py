@@ -15,7 +15,7 @@ class User(AbstractUser):
     # REQUIRED_FIELDS
     position = models.CharField(
         verbose_name='Должность', max_length=2, choices=ROLE)
-    telephone = models.CharField(verbose_name='Телефон', unique=True, max_length=11, error_messages={
+    telephone = models.CharField(verbose_name='Телефон', unique=True, max_length=18, error_messages={
                                  'unique': 'Пользователь с таким telephone уже есть'})
     email = models.EmailField(verbose_name='E-mail',
                               unique=True,

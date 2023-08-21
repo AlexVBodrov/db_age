@@ -25,7 +25,7 @@ class UserRegisterForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'password1', 'password2',
-                  'email', 'position', 'telephone', 'avatar',)
+                  'email', 'position', 'telephone', 'avatar', 'market_number')
 
         widgets = {
             'telephone': forms.widgets.TextInput(attrs={'type': 'tel', }),
