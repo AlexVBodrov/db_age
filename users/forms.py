@@ -18,11 +18,18 @@ class UserRegisterForm(UserCreationForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
+            if field_name == 'telephone':
+                field.widget.attrs['class'] = 'mask-phone form-control'
+                
 
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2',
+        fields = ('username', 'first_name', 'last_name', 'password1', 'password2',
                   'email', 'position', 'telephone', 'avatar',)
+
+        widgets = {
+            'telephone': forms.widgets.TextInput(attrs={'type': 'tel', }),
+        }
 
 
 class UserEditForm(UserChangeForm):
@@ -31,6 +38,8 @@ class UserEditForm(UserChangeForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
+            if field_name == 'telephone':
+                field.widget.attrs['class'] = 'mask-phone form-control'
 
     class Meta:
         model = User
