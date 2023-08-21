@@ -17,7 +17,7 @@ class UserRegisterForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
-            # field.help_text = ''
+            field.help_text = ''
 
     class Meta:
         model = User

@@ -7,13 +7,13 @@ from market_dashbord.models import Market
 
 class Product(models.Model):
     img = models.ImageField(
-        upload_to='products/%Y-%m-%d/', verbose_name='Product')
-    date_best_before = models.DateField()
-    barcode = models.CharField(max_length=15, blank=True)
-    product_name = models.CharField(max_length=100, blank=True)
-    write_off = models.BooleanField(default=False)
-    is_expired = models.BooleanField(default=False)
-    number_of_market = models.ForeignKey(Market, on_delete=models.CASCADE)
+        upload_to='products/%Y-%m-%d/', verbose_name='Фото продукта')
+    date_best_before = models.DateField(verbose_name='Годен до какого числа')
+    barcode = models.CharField(max_length=15, blank=True, verbose_name='Штрихкод')
+    product_name = models.CharField(max_length=100, blank=True, verbose_name='Название')
+    write_off = models.BooleanField(default=False, verbose_name='Списан')
+    is_expired = models.BooleanField(default=False, verbose_name='Просрочен')
+    number_of_market = models.ForeignKey(Market, on_delete=models.CASCADE, verbose_name='Магазин')
 
     def __str__(self):
         return self.product_name

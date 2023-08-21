@@ -91,7 +91,7 @@ def create_food_record(request):
         number_market = request.POST.get('number_of_market')
         return redirect('market_dashbord:market_detail', pk=number_market)
     else:
-        form = AddProductForm()
+        form = AddProductForm(initial={'number_of_market': request.user.market_number})
 
     return render(request, 'create_food_record.html', {'form': form, 'title': title})
 

@@ -14,20 +14,20 @@ class User(AbstractUser):
     )
     # REQUIRED_FIELDS
     position = models.CharField(
-        verbose_name='position', max_length=2, choices=ROLE)
-    telephone = models.CharField(verbose_name='telephone', unique=True, max_length=11, error_messages={
+        verbose_name='Должность', max_length=2, choices=ROLE)
+    telephone = models.CharField(verbose_name='Телефон', unique=True, max_length=11, error_messages={
                                  'unique': 'Пользователь с таким telephone уже есть'})
-    email = models.EmailField(verbose_name='email',
+    email = models.EmailField(verbose_name='E-mail',
                               unique=True,
                               blank=False,
                               error_messages={
                                   'unique': 'Пользователь с таким email уже есть'}
                               )
 
-    market_number = models.ForeignKey(Market, on_delete=models.SET_NULL, verbose_name='market_number', blank=True,
+    market_number = models.ForeignKey(Market, on_delete=models.SET_NULL, verbose_name='Номер магазина', blank=True,
                                       null=True)
     avatar = models.ImageField(
-        upload_to='users_avatars/%Y-%m-%d/', blank=True, verbose_name='avatar')
+        upload_to='users_avatars/%Y-%m-%d/', blank=True, verbose_name='Фото')
 
     def __str__(self):
         # если поля заполнены
